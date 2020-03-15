@@ -32,7 +32,7 @@ public struct AnimatedImage: View {
     
     let contentMode: ContentMode
     
-    init(_  imageSequence: ImageSequence,
+    public init(_  imageSequence: ImageSequence,
          animated: Binding<Bool> = Binding<Bool>.constant(true),
          contentMode: ContentMode = .fit) {
         self.imageSequence = imageSequence
