@@ -31,12 +31,15 @@ public struct AnimatedImage: View {
     @State var image: UIImage?
     
     let contentMode: ContentMode
+    var aspectRatio: CGSize?
     
     public init(_  imageSequence: ImageSequence,
          animated: Binding<Bool> = Binding<Bool>.constant(true),
+         aspectRatio: CGSize? = nil,
          contentMode: ContentMode = .fit) {
         self.imageSequence = imageSequence
         self._animated = animated
+        self.aspectRatio = aspectRatio
         self.contentMode = contentMode
     }
     
@@ -48,7 +51,7 @@ public struct AnimatedImage: View {
                     if self.image != nil {
                         Image(uiImage: self.image!)
                             .resizable()
-                            .aspectRatio(self.image!.size, contentMode: self.contentMode)
+                            .aspectRatio(self.aspectRatio ?? self.image!.size, contentMode: self.contentMode)
                     }
                 }
                 .onReceive(AnimationController.shared.publisher(for: self.imageSequence)) { (img) in
